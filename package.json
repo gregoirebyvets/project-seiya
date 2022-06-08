@@ -1,0 +1,25 @@
+{
+  "name": "by-vets",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ByVets",
+  "author": "Grégoire",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^4.15.2",
+    "gatsby-plugin-react-helmet": "^5.16.0",
+    "gatsby-plugin-sitemap": "^5.16.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0"
+  }
+}
