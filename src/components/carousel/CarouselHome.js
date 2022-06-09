@@ -208,9 +208,6 @@ const CarouselHome = () => {
     return array;
   }
 
-  // function theMagicMethod(elementsCount, specificUniqueProperty) {
-
-  // }
   const theMagicMethod = useCallback(
     (elementsCount, specificUniqueProperty) => {
       if (testiArray.length < elementsCount) {

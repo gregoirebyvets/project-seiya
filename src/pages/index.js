@@ -16,13 +16,16 @@ import { useKeycloak } from "@react-keycloak/web";
 
 const IndexPage = () => {
   const { keycloak } = useKeycloak();
-
+  const logKeycloak = () => {
+    console.log(keycloak);
+  };
   return (
     <Layout>
       {/* <Seo
         description="Quand les vétérinaires prennent les rênes de leur outil informatique..."
         title="ByVets - Logiciel Pegase, gestion informatique de cabinet vétérinaire"
       /> */}
+      <button onClick={logKeycloak}>Log</button>
       <div
         className="block sm:hidden left-0  absolute top-0 w-full bg-cover"
         style={{ backgroundImage: `url(${bgMobile})`, paddingBottom: "96%" }}
