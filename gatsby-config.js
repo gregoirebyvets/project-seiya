@@ -3,6 +3,7 @@ module.exports = {
     title: `ByVets`,
     description: `Logiciel Pegase, gestion informatique de cabinet vétérinaire`,
     author: `ByVets`,
+    siteUrl: "https://dev.byvets.be/contacts",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
