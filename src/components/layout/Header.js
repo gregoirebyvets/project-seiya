@@ -349,7 +349,12 @@ const Header = () => {
                       >
                         +32 85 25 08 25
                       </HeaderButton>
-                      <HeaderButton onClick={() => keycloak.login()}>
+                      <HeaderButton
+                        onClick={() => {
+                          console.log(keycloak);
+                          keycloak.login();
+                        }}
+                      >
                         Me connecter
                       </HeaderButton>
                     </>
