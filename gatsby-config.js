@@ -13,5 +13,22 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-postcss",
+    {
+      resolve: "gatsby-plugin-anchor-links",
+      options: {
+        offset: -150,
+        duration: 500,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `limelight`,
+          `poppins\:200,300,300i,500,400,600,600i,700`, // you can also specify font weights and styles
+        ],
+        display: "swap",
+      },
+    },
   ],
 };
