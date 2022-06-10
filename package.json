@@ -33,6 +33,8 @@
     "gatsby-plugin-sitemap": "^5.16.0",
     "js-file-download": "^0.4.12",
     "keycloak-js": "^18.0.0",
+    "prop-types": "^15.8.1",
+    "query-string": "^7.1.1",
     "react": "^18.1.0",
     "react-awesome-reveal": "^3.8.1",
     "react-device-detect": "^2.2.2",
