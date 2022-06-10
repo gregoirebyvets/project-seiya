@@ -12,8 +12,6 @@ import bgMobile from "../images/homepage_1_mobile.png";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "gatsby";
 
-import { useKeycloak } from "@react-keycloak/web";
-
 const IndexPage = () => {
   return (
     <Layout>
