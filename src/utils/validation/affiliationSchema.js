@@ -9,87 +9,22 @@ Yup.addMethod(Yup.string, "tvaNumber", function (errorMessage) {
         return true;
       }
       if (value) {
-        // function split(str, index) {
-        //   const result = [str.slice(0, index), str.slice(index)];
+        function split(str, index) {
+          const result = [str.slice(0, index), str.slice(index)];
 
-        //   return result;
-        // }
+          return result;
+        }
 
-        // const [countryCode, vatNumber] = split(value, 2);
+        const [countryCode, vatNumber] = split(value, 2);
 
-        // const response = await axios.post(
-        //   "http://localhost:8000/api/subscriptions/checktva",
-        //   {
-        //     countryCode,
-        //     vatNumber,
-        //   }
-        // );
-        // console.log("tva res:", response.data.success);
-        // return response.data.success;
-
-        // let tva = value.replace(/[^a-zA-Z0-9]/g, "");
-        // let isValid = false;
-        // let prefix = tva.substr(0, 2).toUpperCase();
-        // let tvaString = tva.substr(2, tva.length);
-        // let regex = null;
-        // let found = null;
-
-        // if (prefix === "CH") {
-        //   if (tva.length > 2) {
-        //     prefix = "CHE";
-        //     tvaString = value
-        //       .replace(/[^a-zA-Z0-9]/g, "")
-        //       .substr(3, tva.length);
-        //   }
-        // }
-        // switch (prefix) {
-        //   case "BE":
-        //     const startTva = parseInt(
-        //       tvaString.substr(0, tvaString.length - 2)
-        //     );
-        //     const endTva = parseInt(
-        //       tvaString.substr(tvaString.length - 2, tvaString.length)
-        //     );
-        //     const result = 97 - (startTva % 97);
-        //     if (result === endTva) {
-        //       isValid = true;
-        //     }
-        //     break;
-        //   case "FR":
-        //     regex = /^\w{2}\d{9}$/;
-        //     found = tvaString.match(regex);
-        //     if (found) {
-        //       isValid = true;
-        //     }
-        //     break;
-        //   case "DE":
-        //     regex = /^\d{9}$/;
-        //     found = tvaString.match(regex);
-        //     if (found) {
-        //       isValid = true;
-        //     }
-        //     break;
-        //   case "LU":
-        //     regex = /^\d{8}$/;
-        //     found = tvaString.match(regex);
-        //     if (found) {
-        //       isValid = true;
-        //     }
-        //     break;
-        //   case "CHE":
-        //     regex = /^\d{9}(?:tva||TVA)?$/;
-        //     found = tvaString.match(regex);
-        //     if (found) {
-        //       isValid = true;
-        //     }
-        //     break;
-
-        //   default:
-        //     isValid = true;
-        // }
-
-        // return isValid;
-        return true;
+        const response = await axios.post(
+          process.env.BACKEND_API_URL + "/subscriptions/checktva",
+          {
+            countryCode,
+            vatNumber,
+          }
+        );
+        return response.data.success;
       }
     };
 
