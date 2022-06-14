@@ -5,13 +5,14 @@ import withLocation from "../../utils/withLocation";
 import Layout from "../../components/layout/index";
 import ContentButton from "../../components/buttons/ContentButton";
 import axios from "axios";
+import Seo from "../../components/seo";
 
 const ConfirmationPage = ({ params }) => {
   const [status, setStatus] = useState("en cours ...");
   const [subId, setSubId] = useState();
   const [isStatusUpdated, setIsStatusUpdated] = useState(false);
 
-  const textStatus = status => {
+  const textStatus = (status) => {
     if (status !== "") {
       switch (status) {
         case "paid":
@@ -32,7 +33,7 @@ const ConfirmationPage = ({ params }) => {
   };
 
   useEffect(() => {
-    const sendSubscription = id => {
+    const sendSubscription = (id) => {
       axios
         .post(
           process.env.BACKEND_API_URL + "/subscriptions/mail",
@@ -45,15 +46,15 @@ const ConfirmationPage = ({ params }) => {
             mode: "cors",
           }
         )
-        .then(response => {
+        .then((response) => {
           console.log(response);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     };
 
-    const checkStatus = id => {
+    const checkStatus = (id) => {
       setInterval(() => {
         axios
           .post(
@@ -66,7 +67,7 @@ const ConfirmationPage = ({ params }) => {
               mode: "cors",
             }
           )
-          .then(response => {
+          .then((response) => {
             setStatus(response.data.response);
             if (
               response.data.response !== "pending" &&
@@ -75,7 +76,7 @@ const ConfirmationPage = ({ params }) => {
               setIsStatusUpdated(true);
             }
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       }, 1000);
@@ -103,6 +104,10 @@ const ConfirmationPage = ({ params }) => {
 
   return (
     <Layout>
+      <Seo
+        description="Quand les vétérinaires prennent les rênes de leur outil informatique..."
+        title="ByVets - Confirmation de votre adhésion"
+      />
       <section className="">
         <h2 className="text-midnight-blue-500 font-semibold text-4xl mb-8">
           Merci pour votre confiance !

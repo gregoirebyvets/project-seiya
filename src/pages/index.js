@@ -11,14 +11,15 @@ import bgMobile from "../images/homepage_1_mobile.png";
 
 import { Fade } from "react-awesome-reveal";
 import { Link } from "gatsby";
+import Seo from "../components/seo";
 
 const IndexPage = () => {
   return (
     <Layout>
-      {/* <Seo
+      <Seo
         description="Quand les vétérinaires prennent les rênes de leur outil informatique..."
         title="ByVets - Logiciel Pegase, gestion informatique de cabinet vétérinaire"
-      /> */}
+      />
       <div
         className="block sm:hidden left-0  absolute top-0 w-full bg-cover"
         style={{ backgroundImage: `url(${bgMobile})`, paddingBottom: "96%" }}
