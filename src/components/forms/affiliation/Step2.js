@@ -10,6 +10,7 @@ import { violet, mauve } from "@radix-ui/colors";
 import { styled } from "@stitches/react";
 
 import ValidationError from "../ValidationError";
+import { browserName } from "react-device-detect";
 
 const StyledTrigger = styled(SelectRadix.SelectTrigger, {
   all: "unset",
@@ -459,7 +460,9 @@ const Step2 = (props) => {
                                 <div className="select-separator">
                                   <ChevronDownIcon />
                                 </div>
-                                <div>{country.phonePrefix}</div>
+                                <div className="font-normal">
+                                  {country.phonePrefix}
+                                </div>
                               </div>
                             </SelectItemText>
                             <SelectItemIndicator>
@@ -486,11 +489,11 @@ const Step2 = (props) => {
                 }}
                 onBlur={props.formik.handleBlur}
                 value={props.formik.values.phone}
-                className={`border border-trinidad-500 w-full rounded-xl text-base pl-[${
-                  62 + selectedPrefix.length * 10
-                }px] py-1 pr-4 my-outline`}
+                className={`border border-trinidad-500 w-full rounded-xl text-base font-normal py-1 pr-4 my-outline`}
                 style={{
                   paddingLeft: 62 + selectedPrefix.length * 10 + "px",
+                  paddingTop: browserName === "Safari" ? "3.5px" : "4px",
+                  paddingBottom: browserName === "Safari" ? "3.5px" : "4px",
                 }}
               />
             </div>
