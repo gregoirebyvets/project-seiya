@@ -419,7 +419,14 @@ const Step2 = (props) => {
               Téléphone
             </label>
             <div className="relative flex">
-              <MySelect defaultValue="+32" value={selectedPrefix}>
+              <MySelect
+                defaultValue="+32"
+                onValueChange={(e) => {
+                  setSelectedPrefix(e);
+                  console.log(selectedPrefix);
+                }}
+                value={selectedPrefix}
+              >
                 <SelectTrigger
                   aria-label="Préfixe téléphone"
                   tabIndex={0}
@@ -435,7 +442,10 @@ const Step2 = (props) => {
                     <SelectGroup>
                       {countries.map((country) => {
                         return (
-                          <SelectItem value={country.phonePrefix}>
+                          <SelectItem
+                            key={country.phonePrefix}
+                            value={country.phonePrefix}
+                          >
                             <SelectItemText>
                               <div className="flex items-center gap-x-1 font-normal text-midnight-blue-500">
                                 <img
@@ -476,7 +486,12 @@ const Step2 = (props) => {
                 }}
                 onBlur={props.formik.handleBlur}
                 value={props.formik.values.phone}
-                className="border border-trinidad-500 w-full rounded-xl text-base pl-[92px] py-1 pr-4 my-outline"
+                className={`border border-trinidad-500 w-full rounded-xl text-base pl-[${
+                  62 + selectedPrefix.length * 10
+                }px] py-1 pr-4 my-outline`}
+                style={{
+                  paddingLeft: 62 + selectedPrefix.length * 10 + "px",
+                }}
               />
             </div>
 
