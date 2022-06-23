@@ -152,8 +152,14 @@ const AffiliationForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const steps = 3;
+  const date50percent = new Date(2022, 6, 1, 0, 0, 0);
+  let affiliationPrice;
+  if (new Date().getTime() <= new Date(date50percent).getTime()) {
+    affiliationPrice = 595;
+  } else {
+    affiliationPrice = 595 / 2;
+  }
 
-  const affiliationPrice = 595;
   const serverPriceData = [
     {
       users: 0,
@@ -866,7 +872,10 @@ const AffiliationForm = () => {
                               Souscription annuelle
                             </div>
                             <div className="w-1/2 text-right pl-4">
-                              595,00 €
+                              {new Date().getTime() <=
+                              new Date(date50percent).getTime()
+                                ? "595,00 € HTVA"
+                                : "297,5 € HTVA"}
                             </div>
                           </div>
                           {formik.values.serverUser > 0 && (
@@ -1001,7 +1010,10 @@ const AffiliationForm = () => {
                       du logiciel
                     </div>
                     <div className="w-1/2 text-right pl-4 font-light">
-                      595,00 € HTVA
+                      {new Date(2022, 6, 2, 0, 0, 0).getTime() <=
+                      new Date(date50percent).getTime()
+                        ? "595,00 € HTVA"
+                        : "297,5 € HTVA"}
                     </div>
                   </div>
                   {formik.values.serverUser > 0 && (
