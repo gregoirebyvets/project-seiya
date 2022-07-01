@@ -1010,8 +1010,7 @@ const AffiliationForm = () => {
                       du logiciel
                     </div>
                     <div className="w-1/2 text-right pl-4 font-light">
-                      {new Date(2022, 6, 2, 0, 0, 0).getTime() <=
-                      new Date(date50percent).getTime()
+                      {new Date().getTime() <= new Date(date50percent).getTime()
                         ? "595,00 € HTVA"
                         : "297,5 € HTVA"}
                     </div>

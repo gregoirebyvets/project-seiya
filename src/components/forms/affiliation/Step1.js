@@ -21,6 +21,8 @@ const Step1 = (props) => {
     { value: "other", label: "Autre" },
   ];
 
+  const date50percent = new Date(2022, 6, 1, 0, 0, 0);
+
   const handleMigrationChange = (item) => {
     props.formik.setFieldValue("appToMigrate", item.value);
   };
@@ -131,7 +133,11 @@ const Step1 = (props) => {
           <div className="flex-auto text-xl font-semibold">
             <h3>Souscription annuelle</h3>
           </div>
-          <div className="text-right text-xl sm:text-2xl">595,00 €/an</div>
+          <div className="text-right text-xl sm:text-2xl">
+            {new Date().getTime() <= new Date(date50percent).getTime()
+              ? "595,00 € HTVA"
+              : "297,5 € HTVA"}
+          </div>
         </div>
         <div>
           <div>
