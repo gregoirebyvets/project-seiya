@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import downloadWindows from "../../images/support_download_windows.svg";
@@ -9,9 +8,10 @@ import dateFormat from "dateformat";
 
 const DownloadLinks = ({ actions }) => {
   const [lastVersion, setLastVersion] = useState(null);
+  const [infoDownload, setInfoDownload] = useState([]);
 
   useEffect(() => {
-    const fetchVersion = async () => {
+    const fetchInfos = async () => {
       axios
         .get("https://web.byvets.be/api/download/version/pegase", {
           method: "GET",
@@ -23,9 +23,21 @@ const DownloadLinks = ({ actions }) => {
         .catch((err) => {
           console.log(err);
         });
+      axios
+        .get("https://web.byvets.be/api/download/info/", {
+          method: "GET",
+          mode: "cors",
+        })
+        .then((response) => {
+          setInfoDownload(response.data);
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
 
-    fetchVersion();
+    fetchInfos();
   }, []);
   function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return "0 octet";
@@ -85,53 +97,11 @@ const DownloadLinks = ({ actions }) => {
         break;
     }
   };
-  const { isLoading, error, data, isFetching } = useQuery(
-    ["repoData"],
-    async () => {
-      // axios
-      //   .get("https://jsonplaceholder.typicode.com/posts", {
-      //     method: "GET",
-      //     mode: "cors",
-      //   })
-      //   .then((response) => {
-      //     console.log(response.data);
-      //     return response.data;
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-      const { data } = await axios.get(
-        "https://web.byvets.be/api/download/info/"
-      );
-      return data;
-      // return [
-      //   { name: "mac", version: "4.1a9", size: 68422273, date: 1639664989 },
-      //   {
-      //     name: "windows",
-      //     version: "4.1a9",
-      //     size: 73333502,
-      //     date: 1639665111,
-      //   },
-      //   { name: "donnees", version: "4.4", size: 224762, date: 1639665036 },
-      //   {
-      //     name: "misesEnPage",
-      //     version: "1.2.3",
-      //     size: 536226,
-      //     date: 1639665038,
-      //   },
-      // ];
-    },
-    { initialData: [] }
-  );
-
-  if (isLoading) return "Création des liens de téléchargements...";
-
-  if (error) return "Erreur: " + error.message;
 
   return (
     <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
-      {data.length > 0 &&
-        data.map((link) => {
+      {infoDownload.length > 0 &&
+        infoDownload.map((link) => {
           return (
             <button
               key={link.name}
@@ -166,7 +136,7 @@ const DownloadLinks = ({ actions }) => {
                 <p className="mb-1">{getDescription(link.name)}</p>
                 <p className="mb-1">{formatBytes(link.size)}</p>
                 <p className="mb-1">
-                  Màj : {dateFormat(link.date, "dd.mm.yyyy")}
+                  Màj : {dateFormat(new Date(link.date * 1000), "dd.mm.yyyy")}
                 </p>
               </div>
               <div></div>

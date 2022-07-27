@@ -43,7 +43,7 @@ export const wrapRootElement = ({ element }) => {
       }}
       LoadingComponent={<Loading />}
     >
-      <QueryClientProvider client={queryClient}>{element}</QueryClientProvider>
+      {element}
     </ReactKeycloakProvider>
   );
 };

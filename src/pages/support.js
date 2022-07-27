@@ -96,12 +96,6 @@ const SupportPage = () => {
     };
   };
 
-  const { isLoading, error, data, isFetching } = useQuery(["repoData"], () =>
-    axios
-      .get("https://api.github.com/repos/tannerlinsley/react-query")
-      .then((res) => res.data)
-  );
-
   const setHidden = () => {
     console.log(document.body.style.overflow);
     if (document.body.style.overflow !== "hidden") {
