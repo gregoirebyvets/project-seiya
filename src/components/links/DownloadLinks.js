@@ -88,34 +88,40 @@ const DownloadLinks = ({ actions }) => {
   const { isLoading, error, data, isFetching } = useQuery(
     ["repoData"],
     async () => {
-      const res = await axios
-        .get("https://web.byvets.be/api/download/info/", {
-          method: "GET",
-          mode: "cors",
-        })
-        .then((response) => {
-          return response.data;
-        })
-        .catch((err) => {
-          console.log(err);
-          return [
-            { name: "mac", version: "4.1a9", size: 68422273, date: 1639664989 },
-            {
-              name: "windows",
-              version: "4.1a9",
-              size: 73333502,
-              date: 1639665111,
-            },
-            { name: "donnees", version: "4.4", size: 224762, date: 1639665036 },
-            {
-              name: "misesEnPage",
-              version: "1.2.3",
-              size: 536226,
-              date: 1639665038,
-            },
-          ];
-        });
-    }
+      // axios
+      //   .get("https://jsonplaceholder.typicode.com/posts", {
+      //     method: "GET",
+      //     mode: "cors",
+      //   })
+      //   .then((response) => {
+      //     console.log(response.data);
+      //     return response.data;
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      const { data } = await axios.get(
+        "https://web.byvets.be/api/download/info/"
+      );
+      return data;
+      // return [
+      //   { name: "mac", version: "4.1a9", size: 68422273, date: 1639664989 },
+      //   {
+      //     name: "windows",
+      //     version: "4.1a9",
+      //     size: 73333502,
+      //     date: 1639665111,
+      //   },
+      //   { name: "donnees", version: "4.4", size: 224762, date: 1639665036 },
+      //   {
+      //     name: "misesEnPage",
+      //     version: "1.2.3",
+      //     size: 536226,
+      //     date: 1639665038,
+      //   },
+      // ];
+    },
+    { initialData: [] }
   );
 
   if (isLoading) return "Création des liens de téléchargements...";
@@ -165,12 +171,6 @@ const DownloadLinks = ({ actions }) => {
               </div>
               <div></div>
             </button>
-            // <div>
-            //   <h1>
-            //     {getLinkName(link.name)} {link.version}
-            //   </h1>
-            //   <h2>{formatBytes(link.size)}</h2>
-            // </div>
           );
         })}
     </div>
