@@ -17,6 +17,13 @@ import ValidationError from "../components/forms/ValidationError";
 import ContentButton from "../components/buttons/ContentButton";
 import Seo from "../components/seo";
 
+import {
+  useQuery,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+
 import { SupportFormValidationSchema } from "../utils/validation/supportFormSchema";
 
 import avatar1 from "../images/photos/avatars/1.png";
@@ -32,6 +39,7 @@ import downloadApple from "../images/support_download_apple.svg";
 import downloadData from "../images/support_download_data.svg";
 import downloadLayout from "../images/support_download_layout.svg";
 import teamviewerImg from "../images/support_teamviewer.png";
+import DownloadLinks from "../components/links/DownloadLinks";
 
 const SupportPage = () => {
   const supportRef = useRef();
@@ -78,6 +86,21 @@ const SupportPage = () => {
 
     fetchVersion();
   }, []);
+
+  const fetchDownloadInfo = async () => {
+    return {
+      windows: {
+        size: 123456,
+        date: new Date(),
+      },
+    };
+  };
+
+  const { isLoading, error, data, isFetching } = useQuery(["repoData"], () =>
+    axios
+      .get("https://api.github.com/repos/tannerlinsley/react-query")
+      .then((res) => res.data)
+  );
 
   const setHidden = () => {
     console.log(document.body.style.overflow);
@@ -332,7 +355,7 @@ const SupportPage = () => {
       setLayoutStarted(true);
 
       axios
-        .get(`https://web.byvets.be/api/download/mac/MisesEnPage`, {
+        .get(`https://web.byvets.be/api/download/data/MisesEnPage`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${keycloak.token}`,
@@ -363,7 +386,7 @@ const SupportPage = () => {
 
   const downloadDatas = () => {
     axios
-      .get("https://web.byvets.be/api/download/mac/Donnees", {
+      .get("https://web.byvets.be/api/download/data/Donnees", {
         method: "GET",
         mode: "cors",
         headers: {
@@ -383,6 +406,13 @@ const SupportPage = () => {
         console.log(err);
       });
     //
+  };
+
+  const actions = {
+    windows: downloadWinSetup,
+    mac: downloadMacSetup,
+    datas: downloadDatas,
+    layouts: downloadLayouts,
   };
   const downloads = [
     {
@@ -1601,7 +1631,8 @@ const SupportPage = () => {
                   <br /> logiciel{" "}
                   <span className="text-trinidad-500">Pégase</span>
                 </h2>
-                <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
+                <DownloadLinks actions={actions} />
+                {/* <div className="grid sm:grid-cols-2 gap-x-4 gap-y-6">
                   {downloads.map((download, i) => {
                     return (
                       <button
@@ -1626,7 +1657,7 @@ const SupportPage = () => {
                       </button>
                     );
                   })}
-                </div>
+                </div> */}
               </div>
               <div className="relative pl-12 hidden sm:block">
                 <img

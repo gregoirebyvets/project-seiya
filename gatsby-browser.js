@@ -4,6 +4,9 @@ import keycloak from "./src/utils/keycloak";
 
 import "./src/styles/global.css";
 import "./src/styles/style.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const url = typeof window !== "undefined" ? window.location.pathname : "";
 let params = "";
@@ -40,7 +43,7 @@ export const wrapRootElement = ({ element }) => {
       }}
       LoadingComponent={<Loading />}
     >
-      {element}
+      <QueryClientProvider client={queryClient}>{element}</QueryClientProvider>
     </ReactKeycloakProvider>
   );
 };
